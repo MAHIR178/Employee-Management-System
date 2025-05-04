@@ -13,21 +13,63 @@
                     <td>
                         E-mail :
                     </td>
-                    <td><input type="email" name=""></td>
+                    <td><input type="text" id="email" onblur="validateEmail()"></td>
+                    <td><span id="errorEmail" style="color:red"></span></td>
                 </tr>
                 <tr>
                     <td>Password :
                     </td>
-                    <td><input type="password" name=""></td>
+                    <td><input type="password" id="password" onblur="validatePassword()"></td>
+                    <td><span id="errorPassword" style="color:red"></span></td>
                 </tr>
                 <tr> <td>
                     <button type="button">Login</button>
                     </td>
                 </tr>
-                   <tr></tr>
+                <tr>
+                    <td><a href="file:///F:/AZIM%20official/programming/Employee-Management-System/View/Signup.html">signup</a></td>
+                </tr>
                 
             </table>
         </fieldset>
     </form>
+    <script>
+        function validateEmail() {
+            let email = document.getElementById('email').value.trim();
+            let error = document.getElementById('errorEmail');
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email === "") {
+                error.innerHTML = "Email is required.";
+                return false;
+            } else if (!emailPattern.test(email)) {
+                error.innerHTML = "Invalid email format.";
+                return false;
+            } else {
+                error.innerHTML = "";
+                return true;
+            }
+        }
+
+        function validatePassword() {
+            let password = document.getElementById('password').value.trim();
+            let error = document.getElementById('errorPassword');
+
+            if (password === "") {
+                error.innerHTML = "Password is required.";
+                return false;
+            } else {
+                error.innerHTML = "";
+                return true;
+            }
+        }
+
+        function login() {
+            let emailValid = validateEmail();
+            let passValid = validatePassword();
+
+            
+        }
+    </script>
 </body>
 </html>
