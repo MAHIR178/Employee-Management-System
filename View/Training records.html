@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Training Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<fieldset>
+  <legend><b>Course Registration & Assessment</b></legend>
+  <table>
+    <tr>
+      <td>Employee Name:</td>
+      <td><input type="text" id="empName"></td>
+    </tr>
+
+    <tr>
+      <td>Select Course:</td>
+      <td>
+        <select id="courseSelect">
+          <option value="">-- Select Course --</option>
+          <option value="Leadership">Leadership Training</option>
+          <option value="Compliance">Workplace Compliance</option>
+          <option value="Excel">Advanced Excel</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Assessment Score (%):</td>
+      <td><input type="number" id="score" min="0" max="100"></td>
+    </tr>
+
+    <tr>
+      <td>Certification Expiry Date:</td>
+      <td><input type="date" id="expiryDate"></td>
+    </tr>
+
+    <tr>
+      <td>Upload Certificate:</td>
+      <td><input type="file" id="certFile" accept=".pdf,.jpg,.png"></td>
+    </tr>
+
+    <tr>
+      <td colspan="2" align="center">
+        <br>
+        <input type="button" value="Submit Training" onclick="submitTraining()">
+      </td>
+    </tr>
+  </table>
+</fieldset>
+
+
+<p id="errorTrain" style="color:red;"></p>
+<p id="output" style="color:green;"></p>
+
+<script>
+let completedCourses = [];
+
+function submitTraining() {
+  let empName = document.getElementById("empName").value.trim();
+  let course = document.getElementById("courseSelect").value;
+  let score = document.getElementById("score").value;
+  let expiryDate = document.getElementById("expiryDate").value;
+  let certFile = document.getElementById("certFile").files[0];
+  let error = document.getElementById("errorTrain");
+  let output = document.getElementById("output");
+
+  error.innerHTML = "";
+  output.innerHTML = "";
+
+  if (!empName || !course || !score || !expiryDate || !certFile) {
+    error.innerHTML = "Please fill in all fields and upload a certificate.";
+    return;
+  }
+
+  if (parseInt(score) < 60) {
+    error.innerHTML = "Assessment failed. Minimum score is 60%.";
+    return;
+  }
+
+
+  completedCourses.push(course);
+
+  
+  let expiry = new Date(expiryDate);
+  let today = new Date();
+  let timeDiff = expiry - today;
+  let daysLeft = timeDiff / (1000 * 60 * 60 * 24);
+  if (daysLeft <= 30) {
+    output.innerHTML += "⚠️ Certification will expire in " + Math.floor(daysLeft) + " day(s).<br>";
+  }
+
+  output.innerHTML += "✅ Training record submitted for " + empName + ". Course: " + course + "<br>";
+}
+
+
+</script>
+
+</body>
+</html>
