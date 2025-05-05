@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Profile Management</title>
+    <style>
+        body {
+            background: lightgray;
+            text-align: center;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            width: 300px;
+            border: 1px solid gray;
+        }
+
+        input, select {
+            width: 95%;
+            padding: 5px;
+            margin: 8px 0;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        button {
+            background: blue;
+            color: white;
+            border: none;
+            padding: 8px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkblue;
+        }
+
+        legend {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form>
+        <fieldset>
+            <legend>Update Profile</legend>
+
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" onblur="validateName('fullname', 'errorName')">
+            <p id="errorName" class="error"></p>
+
+            <label for="email">Email</label>
+            <input type="text" id="email" onblur="validateEmail('email', 'errorEmail')">
+            <p id="errorEmail" class="error"></p>
+
+            <label for="password">New Password</label>
+            <input type="password" id="password" onblur="validateEmpty('password', 'errorPassword')">
+            <p id="errorPassword" class="error"></p>
+
+            <label for="avatar">Profile Picture</label>
+            <input type="file" id="avatar" accept="image/*">
+            
+            <button type="button" onclick="submitForm()">Save Changes</button>
+        </fieldset>
+    </form>
+
+    <script>
+        function validateEmpty(id, errorId) {
+            let value = document.getElementById(id).value.trim();
+            if (value === "") {
+                document.getElementById(errorId).textContent = "This field cannot be empty.";
+                return false;
+            }
+            document.getElementById(errorId).textContent = "";
+            return true;
+        }
+
+        function validateName(id, errorId) {
+            let name = document.getElementById(id).value.trim();
+            if (name === "") {
+                document.getElementById(errorId).textContent = "Name cannot be empty.";
+                return false;
+            }
+            if (!/^[a-zA-Z]/.test(name)) {
+                document.getElementById(errorId).textContent = "Name must start with a letter.";
+                return false;
+            }
+            if (!/^[a-zA-Z.\-\s]+$/.test(name)) {
+                document.getElementById(errorId).textContent = "Only letters, dots (.), dashes (-), and spaces allowed.";
+                return false;
+            }
+            document.getElementById(errorId).textContent = "";
+            return true;
+        }
+
+        function validateEmail(id, errorId) {
+            let email = document.getElementById(id).value.trim();
+            let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === "") {
+                document.getElementById(errorId).textContent = "Email cannot be empty.";
+                return false;
+            }
+            if (!pattern.test(email)) {
+                document.getElementById(errorId).textContent = "Invalid email format.";
+                return false;
+            }
+            document.getElementById(errorId).textContent = "";
+            return true;
+        }
+
+        function submitForm() {
+            let isValid = true;
+            isValid &= validateName('fullname', 'errorName');
+            isValid &= validateEmail('email', 'errorEmail');
+            isValid &= validateEmpty('password', 'errorPassword');
+
+            if (isValid) {
+                alert("Profile updated successfully!");
+            }
+        }
+    </script>
+
+</body>
+</html>
