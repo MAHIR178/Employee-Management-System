@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document Storage</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<fieldset>
+  <legend><b>Upload Document</b></legend>
+  <table>
+
+   
+    <tr>
+      <td>Document Title:</td>
+      <td><input type="text" id="docTitle"></td>
+    </tr>
+
+ 
+    <tr>
+      <td>Select File:</td>
+      <td><input type="file" id="docFile" accept=".pdf,.doc,.docx,.jpg,.png"></td>
+    </tr>
+
+
+    <tr>
+      <td>Access Permission:</td>
+      <td>
+        <select id="permission">
+          <option value="">-- Select Access Level --</option>
+          <option value="hr">HR Only</option>
+          <option value="manager">Managers</option>
+          <option value="employee">Employee & HR</option>
+        </select>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>Electronic Signature:</td>
+      <td><input type="text" id="signatureName" placeholder="Type your full name"></td>
+    </tr>
+
+
+    <tr>
+      <td>Retention Until:</td>
+      <td><input type="date" id="retentionDate"></td>
+    </tr>
+
+  
+    <tr>
+      <td colspan="2" align="center">
+        <br>
+        <input type="button" value="Upload Document" onclick="validateDocForm()">
+      </td>
+    </tr>
+
+  </table>
+</fieldset>
+
+<p id="errorDoc" style="color:red;"></p>
+
+<script>
+function validateDocForm() {
+  let title = document.getElementById("docTitle").value.trim();
+  let file = document.getElementById("docFile").files[0];
+  let permission = document.getElementById("permission").value;
+  let signatureName = document.getElementById("signatureName").value.trim();
+  let retentionDate = document.getElementById("retentionDate").value;
+  let error = document.getElementById("errorDoc");
+
+  error.innerHTML = "";
+
+  if (!title) {
+    error.innerHTML = "Please enter the document title.";
+    return;
+  }
+
+  if (!file) {
+    error.innerHTML = "Please select a document file to upload.";
+    return;
+  }
+
+  if (!permission) {
+    error.innerHTML = "Please select an access permission.";
+    return;
+  }
+
+  if (!signatureName) {
+    error.innerHTML = "Please provide your electronic signature.";
+    return;
+  }
+
+  if (!retentionDate) {
+    error.innerHTML = "Please specify a retention end date.";
+    return;
+  }
+
+  alert("Document uploaded successfully!");
+}
+</script>
+
+</body>
+</html>

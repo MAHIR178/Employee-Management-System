@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exit Interview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<fieldset>
+  <legend><b>Exit Interview Form</b></legend>
+  <table>
+
+  
+    <tr>
+      <td>Employee Name:</td>
+      <td><input type="text" id="empName"></td>
+    </tr>
+
+  
+    <tr>
+      <td>Department:</td>
+      <td><input type="text" id="department"></td>
+    </tr>
+
+
+    <tr>
+      <td>Reason for Leaving:</td>
+      <td>
+        <select id="reason">
+          <option value="">-- Select --</option>
+          <option value="Career Growth">Career Growth</option>
+          <option value="Compensation">Compensation</option>
+          <option value="Relocation">Relocation</option>
+          <option value="Other">Other</option>
+        </select>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>Feedback:</td>
+      <td><textarea id="feedback" rows="4" cols="30"></textarea></td>
+    </tr>
+
+
+    <tr>
+      <td>Assets Returned:</td>
+      <td>
+        <input type="checkbox" id="laptop"> Laptop<br>
+        <input type="checkbox" id="idCard"> ID Card<br>
+        <input type="checkbox" id="phone"> Company Phone
+      </td>
+    </tr>
+
+    <tr>
+      <td>Join Alumni Network:</td>
+      <td>
+        <input type="radio" name="alumni" value="yes"> Yes
+        <input type="radio" name="alumni" value="no"> No
+      </td>
+    </tr>
+
+
+    <tr>
+      <td colspan="2" align="center">
+        <br>
+        <input type="button" value="Submit Exit Interview" onclick="submitExitForm()">
+      </td>
+    </tr>
+
+  </table>
+</fieldset>
+
+<p id="exitMsg" style="color:red;"></p>
+
+<script>
+function submitExitForm() {
+  let name = document.getElementById("empName").value.trim();
+  let dept = document.getElementById("department").value.trim();
+  let reason = document.getElementById("reason").value;
+  let msg = document.getElementById("exitMsg");
+
+  msg.innerHTML = "";
+
+  if (!name || !dept || !reason) {
+    msg.innerHTML = "Please fill in all required fields (Name, Department, Reason).";
+    return;
+  }
+
+  msg.style.color = "green";
+ alert( "Exit interview submitted. Thank you!");
+}
+</script>
+
+</body>
+</html>

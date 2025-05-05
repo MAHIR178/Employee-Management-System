@@ -1,0 +1,94 @@
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f9;
+    margin: 20px;
+    color: #333;
+  }
+  
+  
+  h1, h2, legend {
+    color: #2c3e50;
+  }
+  
+ 
+  fieldset {
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #d6e1e3;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-top: 100px;
+    margin-left: 300px;
+    
+  }
+  
+
+  table {
+    width: 100%;
+    border-spacing: 10px;
+  }
+  
+  td {
+    vertical-align: center;
+  }
+  
+
+  input[type="text"],
+  input[type="email"],
+  input[type="file"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 14px;
+    
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+
+  input[type="button"],
+  button {
+    padding: 10px 20px;
+    background-color: #2e86de;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="button"]:hover,
+  button:hover {
+    background-color: #1b4f72;
+  }
+  
+  /* Error Message */
+  #error,
+  #errorMsg,
+  #errorDoc {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+  
+  /* Reactions & Comments Placeholder */
+  .comments-placeholder {
+    font-style: italic;
+    color: #555;
+  }
+  
+  /* Multiselect size fix */
+  select[multiple] {
+    height: auto;
+    min-height: 80px;
+  }
+  

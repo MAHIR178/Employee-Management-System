@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search & Filter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<fieldset>
+  <legend><b>Search & Filter</b></legend>
+  <table>
+   
+    <tr>
+      <td>Search:</td>
+      <td><input type="text" id="searchInput" onkeyup="filterResults()"></td>
+    </tr>
+
+   
+    <tr>
+      <td>Category:</td>
+      <td>
+        <select id="categoryFilter" onchange="filterResults()">
+          <option value="all">All</option>
+          <option value="HR">HR</option>
+          <option value="IT">IT</option>
+          <option value="Finance">Finance</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+</fieldset>
+
+
+<fieldset>
+  <legend><b>Results</b></legend>
+  <ul id="resultsList">
+    <li data-category="HR">HR Policy Handbook</li>
+    <li data-category="IT">System Architecture Document</li>
+    <li data-category="Finance">Annual Budget Report</li>
+    <li data-category="HR">Employee Benefits Guide</li>
+    <li data-category="IT">Network Configuration Manual</li>
+    <li data-category="Finance">Payroll Summary</li>
+  </ul>
+</fieldset>
+
+<script>
+function filterResults() {
+  let query = document.getElementById("searchInput").value.toLowerCase();
+  let category = document.getElementById("categoryFilter").value;
+  let items = document.getElementById("resultsList").getElementsByTagName("li");
+
+  for (let i = 0; i < items.length; i++) {
+    let text = items[i].textContent.toLowerCase();
+    let itemCategory = items[i].getAttribute("data-category");
+
+    let matchesQuery = text.includes(query);
+    let matchesCategory = (category === "all" || category === itemCategory);
+
+    items[i].style.display = (matchesQuery && matchesCategory) ? "" : "none";
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timesheet</title>
+  <link rel="stylesheet" href="style.css">
+
+  
+
+</head>
+<body>
+
+<fieldset>
+  <legend><b>Weekly Timesheet</b></legend>
+  <table>
+
+ 
+    <tr>
+      <td>Employee ID:</td>
+      <td><input type="text" id="empId"></td>
+    </tr>
+
+   
+    <tr>
+      <td>Project Code:</td>
+      <td><input type="text" id="projectCode"></td>
+    </tr>
+
+
+    <tr><td>Mon:</td><td><input type="number" id="mon" min="0" max="24"></td></tr>
+    <tr><td>Tue:</td><td><input type="number" id="tue" min="0" max="24"></td></tr>
+    <tr><td>Wed:</td><td><input type="number" id="wed" min="0" max="24"></td></tr>
+    <tr><td>Thu:</td><td><input type="number" id="thu" min="0" max="24"></td></tr>
+    <tr><td>Fri:</td><td><input type="number" id="fri" min="0" max="24"></td></tr>
+    <tr><td>Sat:</td><td><input type="number" id="sat" min="0" max="24"></td></tr>
+    <tr><td>Sun:</td><td><input type="number" id="sun" min="0" max="24"></td></tr>
+
+
+    <tr>
+      <td>Clock In / Out:</td>
+      <td>
+        <input type="button" value="Clock In" onclick="clock('in')">
+        <input type="button" value="Clock Out" onclick="clock('out')">
+      </td>
+    </tr>
+
+
+    <tr>
+      <td colspan="2" align="center">
+        <br>
+        <input type="button" value="Submit Timesheet" onclick="submitTimesheet()">
+      </td>
+    </tr>
+
+  </table>
+</fieldset>
+
+<p id="errorMsg" style="color:red;"></p>
+<p id="timesheetMsg" style="color:green;"></p>
+<p id="gpsLog" style="color:gray;"></p>
+
+<script>
+function clock(action) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      let msg = action === 'in' ? 'Clocked In' : 'Clocked Out';
+      document.getElementById("gpsLog").innerText = 
+        msg + " at GPS (" + pos.coords.latitude.toFixed(4) + ", " + pos.coords.longitude.toFixed(4) + ")";
+    });
+  } else {
+    document.getElementById("gpsLog").innerText = "Geolocation not supported.";
+  }
+}
+
+function submitTimesheet() {
+  let empId = document.getElementById("empId").value.trim();
+  let projectCode = document.getElementById("projectCode").value.trim();
+  let error = document.getElementById("errorMsg");
+  let msg = document.getElementById("timesheetMsg");
+
+  error.innerHTML = "";
+  msg.innerHTML = "";
+
+  if (!empId || !projectCode) {
+    error.innerHTML = "Employee ID and Project Code are required.";
+    return;
+  }
+
+  let total = 0;
+  let fields = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+  for (let i = 0; i < fields.length; i++) {
+    let val = parseFloat(document.getElementById(fields[i]).value) || 0;
+    total += val;
+  }
+
+  msg.innerHTML = "Timesheet submitted. Total Hours: " + total;
+  if (total > 40) {
+    msg.innerHTML += " — Overtime alert!";
+  }
+}
+</script>
+
+</body>
+</html>

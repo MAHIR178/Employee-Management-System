@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Error Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<fieldset>
+  <legend><b>Select Error Type</b></legend>
+  <table>
+    <tr>
+      <td>
+        <input type="radio" name="errorType" value="404" onclick="showError('404')" checked> 404 Not Found
+      </td>
+      <td>
+        <input type="radio" name="errorType" value="500" onclick="showError('500')"> 500 Server Error
+      </td>
+    </tr>
+  </table>
+</fieldset>
+
+<!-- 404 Error Section -->
+<fieldset id="error404">
+  <legend><b>Error 404: Page Not Found</b></legend>
+  <table>
+    <tr>
+      <td colspan="2">Sorry, the page you are looking for does not exist.</td>
+    </tr>
+    <tr>
+      <td><b>Suggested Actions:</b></td>
+      <td>
+        <ul>
+          <li>Check the URL for typos</li>
+          <li>Return to the <a href="index.html">Home Page</a></li>
+          <li>Contact support if the issue persists</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <button onclick="window.location.href='index.html'">Back to Safety</button>
+      </td>
+    </tr>
+  </table>
+</fieldset>
+
+<!-- 500 Error Section -->
+<fieldset id="error500" style="display:none;">
+  <legend><b>Error 500: Server Error</b></legend>
+  <table>
+    <tr>
+      <td colspan="2">Oops! Something went wrong on our end.</td>
+    </tr>
+    <tr>
+      <td><b>Suggested Actions:</b></td>
+      <td>
+        <ul>
+          <li>Try refreshing the page</li>
+          <li>Wait a moment and try again later</li>
+          <li>Report the issue to the IT team</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <button onclick="window.location.href='index.html'">Return to Home</button>
+      </td>
+    </tr>
+  </table>
+</fieldset>
+
+<script>
+function showError(type) {
+  let e404 = document.getElementById("error404");
+  let e500 = document.getElementById("error500");
+
+  if (type === "404") {
+    e404.style.display = "";
+    e500.style.display = "none";
+  } else {
+    e404.style.display = "none";
+    e500.style.display = "";
+  }
+}
+</script>
+
+</body>
+</html>
