@@ -9,7 +9,7 @@
             echo "Null username/password!";
         } else if($username == $password){
             setcookie('status', 'true', time()+3000, '/');
-            header('location: home.php');
+            header('location: Dashboard.html');
         } else {
             echo "invalid user!";
         }
