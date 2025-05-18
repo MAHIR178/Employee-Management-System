@@ -14,6 +14,6 @@
             echo "invalid user!";
         }
     } else {
-        header('location: login.html');
+        header('location: UAuthentication.html');
     }
 ?>
