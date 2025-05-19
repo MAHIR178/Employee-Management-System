@@ -26,9 +26,10 @@
         <h1 id="head">Welcome, <?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?>!</h1>
 
         <div class="widget-container">
-            <div class="widget" onclick="showDetails('View Profile')">
-                <strong>View Profile</strong>
+            <div class="widget" onclick="window.location.href='profilemanage.html'">
+                <strong>profile_management</strong>
                 <p>Access your personal information</p>
+            </div>
             </div>
             <div class="widget" onclick="showDetails('Task Completed')">
                 <strong>Task Completed: 14</strong>

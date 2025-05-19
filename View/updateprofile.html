@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="../Asset/Style.css">
+</head>
+<body>
+    <div class="container">
+        <fieldset>
+            <legend>Edit Profile</legend>
+            <form action="upload.php" method="post" enctype="multipart/form-data" onsubmit="return validateAll()">
+                <label for="fullname">Full Name</label>
+                <input type="text" name="fullname" id="fullname" onblur="validateName('fullname', 'errorName')">
+                <p id="errorName" class="error"></p>
+
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" onblur="validateEmail('email', 'errorEmail')">
+                <p id="errorEmail" class="error"></p>
+
+                <label for="password">New Password</label>
+                <input type="password" name="password" id="password" onblur="validateEmpty('password', 'errorPassword')">
+                <p id="errorPassword" class="error"></p>
+
+                <label for="avatar">Profile Picture</label>
+                <input type="file" name="myfile" id="avatar" accept="image/*">
+                
+                <button type="submit">Save Changes</button>
+                <a href="profilemanage.html"><button type="button">Back to Profile Management</button></a>
+            </form>
+        </fieldset>
+    </div>
+
+    <script>
+        function validateEmpty(id, errorId) {
+            let value = document.getElementById(id).value.trim();
+            if (value === "") {
+                document.getElementById(errorId).textContent = "This field cannot be empty.";
+                return false;
+            }
+            document.getElementById(errorId).textContent = "";
+            return true;
+        }
+
+        function validateName(id, errorId) {
+            let name = document.getElementById(id).value.trim();
+            if (name === "") {
+                document.getElementById(errorId).textContent = "Name cannot be empty.";
+                return false;
+            }
+            if (!/^[a-zA-Z]/.test(name)) {
+                document.getElementById(errorId).textContent = "Name must start with a letter.";
+                return false;
+            }
+            if (!/^[a-zA-Z.\-\s]+$/.test(name)) {
+                document.getElementById(errorId).textContent = "Only letters, dots (.), dashes (-), and spaces allowed.";
+                return false;
+            }
+            document.getElementById(errorId).textContent = "";
+            return true;
+        }
+
+        function validateEmail(id, errorId) {
+            let value = document.getElementById(id).value.trim();
+            let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (value === "") {
+                document.getElementById(errorId).textContent = "Email cannot be empty.";
+                return false;
+            }
+            if (!pattern.test(value)) {
+                document.getElementById(errorId).textContent = "Invalid email format.";
+                return false;
+            }
+            document.getElementById(errorId).textContent = "";
+            return true;
+        }
+
+        function validateAll() {
+            let validName = validateName('fullname', 'errorName');
+            let validEmail = validateEmail('email', 'errorEmail');
+            let validPassword = validateEmpty('password', 'errorPassword');
+            return validName && validEmail && validPassword;
+        }
+    </script>
+</body>
+</html>
