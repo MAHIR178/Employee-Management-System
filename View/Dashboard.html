@@ -1,0 +1,76 @@
+<?php
+    session_start();
+    if(isset($_COOKIE['status'])){
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+   <link rel="stylesheet" href="../Asset/dashboardstyle.css">
+    
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <a href="documentstorage.html" class="nav-button">Document Storage</a>
+        <a href="orgchart.html" class="nav-button">Organization Chart</a>
+        <a href="search.html" class="nav-button">Search</a>
+        <a href="exit.html" class="nav-button logout-btn">Exit</a>
+        <a href="logout.php" class="nav-button logout-btn">Logout</a>
+    </div>
+
+    <div class="main-content">
+        <h1 id="head">Welcome, <?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?>!</h1>
+
+        <div class="widget-container">
+            <div class="widget" onclick="showDetails('View Profile')">
+                <strong>View Profile</strong>
+                <p>Access your personal information</p>
+            </div>
+            <div class="widget" onclick="showDetails('Task Completed')">
+                <strong>Task Completed: 14</strong>
+                <p>View completed tasks</p>
+            </div>
+            <div class="widget" onclick="showDetails('Notifications')">
+                <strong>Notifications: 3</strong>
+                <p>Check your updates</p>
+            </div>
+        </div>
+
+        <p id="error"></p>
+    </div>
+
+    <script>
+        function showDetails(info) {
+            const header = document.getElementById('head');
+            header.innerHTML = info;
+            header.style.color = '#3498db';
+            document.getElementById('error').innerHTML = "";
+            
+            // Reset header color after 1 second
+            setTimeout(() => {
+                header.style.color = '#2c3e50';
+            }, 1000);
+        }
+
+        function updateProfile() {
+            let confirmUpdate = confirm("Do you want to update your profile?");
+            if (confirmUpdate) {
+                document.getElementById('head').innerHTML = "Update Profile (Shortcut)";
+                document.getElementById('error').innerHTML = "";
+            } else {
+                document.getElementById('error').innerHTML = "Update cancelled!";
+            }
+        }
+    </script>
+</body>
+</html>
+
+<?php
+    } else {
+        header('location: login.html');
+    }
+?>
