@@ -7,7 +7,7 @@
             text-align: center;
             background: lightgray;
         }
-    
+
         form {
             margin: 40px auto;
             padding: 15px;
@@ -15,25 +15,25 @@
             background: white;
             border: 1px solid gray;
         }
-    
-        input, select {
+
+        input {
             width: 95%;
             padding: 5px;
             margin: 8px 0;
         }
-    
+
         label {
             display: block;
             text-align: left;
             margin: 10px 0 5px;
         }
-    
+
         .error {
             color: red;
             font-size: 12px;
             text-align: left;
         }
-    
+
         button {
             background: blue;
             color: white;
@@ -43,47 +43,42 @@
             margin-top: 10px;
             cursor: pointer;
         }
-    
+
         button:hover {
             background: darkblue;
         }
-    
+
         legend {
             font-size: 18px;
             margin-bottom: 10px;
         }
     </style>
-    
 </head>
 <body>
-    <form>
+    <form method="post" action="loginCheck.php">
         <fieldset>
             <legend>Login</legend>
             <table>
                 <tr>
-                    <td>
-                        E-mail :
-                    </td>
-                    <td><input type="text" id="email" onblur="validateEmail()"></td>
+                    <td>E-mail:</td>
+                    <td><input type="text" name="username" id="email" onblur="validateEmail()"></td>
                     <td><span id="errorEmail" style="color:red"></span></td>
                 </tr>
                 <tr>
-                    <td>Password :
-                    </td>
-                    <td><input type="password" id="password" onblur="validatePassword()"></td>
+                    <td>Password:</td>
+                    <td><input type="password" name="password" id="password" onblur="validatePassword()"></td>
                     <td><span id="errorPassword" style="color:red"></span></td>
                 </tr>
-                <tr> <td>
-                    <button type="button">Login</button>
-                    </td>
+                <tr>
+                    <td colspan="2"><button type="submit" name="submit">Login</button></td>
                 </tr>
                 <tr>
-                    <td><a href="file:///F:/AZIM%20official/programming/Employee-Management-System/View/Signup.html">signup</a></td>
+                    <td colspan="2"><a href="signup.html">Signup</a></td>
                 </tr>
-                
             </table>
         </fieldset>
     </form>
+
     <script>
         function validateEmail() {
             let email = document.getElementById('email').value.trim();
@@ -113,13 +108,6 @@
                 error.innerHTML = "";
                 return true;
             }
-        }
-
-        function login() {
-            let emailValid = validateEmail();
-            let passValid = validatePassword();
-
-            
         }
     </script>
 </body>

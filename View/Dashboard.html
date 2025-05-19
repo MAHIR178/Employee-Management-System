@@ -1,7 +1,12 @@
+<?php
+    session_start();
+    if(isset($_COOKIE['status'])){
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Dashboard</title>
+  <title>Home</title>
   <style>
     body {
       font-family: Arial;
@@ -46,21 +51,14 @@
 
   <h1 id="head">Dashboard</h1>
 
-
-  <div class="widget" onclick="showDetails('View Profile')">
-     View Profile
-  </div>
-  <div class="widget" onclick="showDetails('Task Completed')">
-     Task Completed: <strong>14</strong>
-  </div>
-  <div class="widget" onclick="showDetails('Notifications')">
-     Notifications: <strong>3</strong>
-  </div>
-
+  <div class="widget" onclick="showDetails('View Profile')">View Profile</div>
+  <div class="widget" onclick="showDetails('Task Completed')">Task Completed: <strong>14</strong></div>
+  <div class="widget" onclick="showDetails('Notifications')">Notifications: <strong>3</strong></div>
 
   <button onclick="updateProfile()">Update Profile</button>
-
   <p id="error"></p>
+  <br>
+  <a href="logout.php">Logout</a>
 
   <script>
     function showDetails(info) {
@@ -81,3 +79,9 @@
 
 </body>
 </html>
+
+<?php
+    } else {
+        header('location: login.html');
+    }
+?>
