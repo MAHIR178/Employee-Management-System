@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Requests</title>
+    <link rel="stylesheet" href="../Asset/Style.css">
+</head>
+<body>
+    <div class="container">
+        <fieldset>
+            <legend>Leave Requests</legend>
+            <div class="leave-request">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate">
+                <label for="leaveType">Leave Type:</label>
+                <select id="leaveType" name="leaveType">
+                    <option value="vacation">Vacation</option>
+                    <option value="sick">Sick Leave</option>
+                    <option value="personal">Personal Leave</option>
+                </select>
+                <button onclick="submitLeaveRequest()">Submit Request</button>
+                <p id="leaveMessage" class="message"></p>
+            </div>
+            <a href="Dashboard.html"><button>Back to Dashboard</button></a>
+        </fieldset>
+    </div>
+
+    <script>
+        function submitLeaveRequest() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const leaveType = document.getElementById('leaveType').value;
+            const message = document.getElementById('leaveMessage');
+
+            if (!startDate || !endDate) {
+                message.textContent = 'Please select both start and end dates.';
+                return;
+            }
+
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            if (start > end) {
+                message.textContent = 'End date must be after start date.';
+                return;
+            }
+
+            message.textContent = `Leave request for ${leaveType} from ${startDate} to ${endDate} submitted successfully!`;
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            document.getElementById('leaveType').value = 'vacation';
+        }
+    </script>
+</body>
+</html>
