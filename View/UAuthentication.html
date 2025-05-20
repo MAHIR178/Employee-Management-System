@@ -55,19 +55,19 @@
     </style>
 </head>
 <body>
-    <form method="post" action="loginCheck.php">
+    <form method="post" action="../Controller/loginCheck.php" onsubmit="return validateForm()">
         <fieldset>
             <legend>Login</legend>
             <table>
                 <tr>
-                    <td>E-mail:</td>
-                    <td><input type="text" name="username" id="email" onblur="validateEmail()"></td>
-                    <td><span id="errorEmail" style="color:red"></span></td>
+                    <td>Username:</td>
+                    <td><input type="text" name="username" id="username" onblur="validateUsername()"></td>
+                    <td><span id="errorUsername" class="error"></span></td>
                 </tr>
                 <tr>
                     <td>Password:</td>
                     <td><input type="password" name="password" id="password" onblur="validatePassword()"></td>
-                    <td><span id="errorPassword" style="color:red"></span></td>
+                    <td><span id="errorPassword" class="error"></span></td>
                 </tr>
                 <tr>
                     <td colspan="2"><button type="submit" name="submit">Login</button></td>
@@ -80,16 +80,11 @@
     </form>
 
     <script>
-        function validateEmail() {
-            let email = document.getElementById('email').value.trim();
-            let error = document.getElementById('errorEmail');
-            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (email === "") {
-                error.innerHTML = "Email is required.";
-                return false;
-            } else if (!emailPattern.test(email)) {
-                error.innerHTML = "Invalid email format.";
+        function validateUsername() {
+            let username = document.getElementById('username').value.trim();
+            let error = document.getElementById('errorUsername');
+            if (username === "") {
+                error.innerHTML = "Username is required.";
                 return false;
             } else {
                 error.innerHTML = "";
@@ -100,7 +95,6 @@
         function validatePassword() {
             let password = document.getElementById('password').value.trim();
             let error = document.getElementById('errorPassword');
-
             if (password === "") {
                 error.innerHTML = "Password is required.";
                 return false;
@@ -108,6 +102,12 @@
                 error.innerHTML = "";
                 return true;
             }
+        }
+
+        function validateForm() {
+            let validUsername = validateUsername();
+            let validPassword = validatePassword();
+            return validUsername && validPassword;
         }
     </script>
 </body>
