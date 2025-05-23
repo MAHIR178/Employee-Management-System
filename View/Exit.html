@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Exit Interview</title>
+  <title>Exit</title>
   <link rel="stylesheet" href="../Asset/Style.css">
 </head>
 <body>
 
 <fieldset>
-  <legend><b>Exit Interview Form</b></legend>
+  <legend><b>Exit-Form</b></legend>
   <table>
 
   
@@ -65,7 +65,7 @@
     <tr>
       <td colspan="2" align="center">
         <br>
-        <input type="button" value="Submit Exit Interview" onclick="submitExitForm()">
+        <input type="submit" value="Submit" onclick="submitExitForm()">
       </td>
     </tr>
 
@@ -84,12 +84,12 @@ function submitExitForm() {
   msg.innerHTML = "";
 
   if (!name || !dept || !reason) {
-    msg.innerHTML = "Please fill in all required fields (Name, Department, Reason).";
+   alert("Please fill in all required fields (Name, Department, Reason).");
     return;
   }
 
   msg.style.color = "green";
- alert( "Exit interview submitted. Thank you!");
+ alert( "Exit Form submitted. Thank you!");
 }
 </script>
 
