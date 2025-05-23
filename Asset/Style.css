@@ -1,94 +1,212 @@
 
-body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f9;
-    margin: 20px;
-    color: #333;
-  }
-  
-  
-  h1, h2, legend {
-    color: #2c3e50;
-  }
-  
- 
-  fieldset {
-    width: 50%;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #d6e1e3;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-top: 100px;
-    margin-left: 300px;
-    
-  }
-  
-
-  table {
-    width: 100%;
-    border-spacing: 10px;
-  }
-  
-  td {
-    vertical-align: center;
-  }
-  
-
-  input[type="text"],
-  input[type="email"],
-  input[type="file"],
-  input[type="date"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-    font-size: 14px;
-    
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-  }
-  
-  textarea {
-    resize: vertical;
-  }
-  
+}
 
-  input[type="button"],
-  button {
-    padding: 10px 20px;
-    background-color: #2e86de;
-    border: none;
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+
+fieldset {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+legend {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #2c3e50;
+    padding: 0 10px;
+}
+
+
+h3 {
+    font-size: 1.2em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+
+label {
+    display: block;
+    font-size: 1em;
+    color: #34495e;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+select,
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    color: white;
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 10px;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1em;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
-  
-  input[type="button"]:hover,
-  button:hover {
-    background-color: #1b4f72;
-  }
-  
-  /* Error Message */
-  #error,
-  #errorMsg,
-  #errorDoc {
-    color: #e74c3c;
-    font-weight: bold;
-  }
-  
-  /* Reactions & Comments Placeholder */
-  .comments-placeholder {
-    font-style: italic;
-    color: #555;
-  }
-  
-  /* Multiselect size fix */
-  select[multiple] {
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #2980b9;
+    transform: scale(1.02);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button[type="button"] {
+    background-color: #7f8c8d;
+}
+
+button[type="button"]:hover {
+    background-color: #6c757d;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a button {
+    background-color: #7f8c8d;
+}
+
+a button:hover {
+    background-color: #6c757d;
+}
+
+
+.profile-field {
+    margin-bottom: 15px;
+}
+
+.profile-field label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.profile-field p {
+    font-size: 1em;
+    color: #34495e;
+    margin-top: 5px;
+}
+
+.profile-field img {
+    max-width: 100px;
     height: auto;
-    min-height: 80px;
-  }
-  
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+
+.leave-request {
+    margin-bottom: 20px;
+}
+
+.leave-request label {
+    margin-top: 10px;
+}
+
+.leave-request select {
+    background-color: #f9f9f9;
+}
+
+
+.error,
+.message {
+    font-size: 0.9em;
+    margin-top: 5px;
+    min-height: 20px;
+}
+
+.error {
+    color: #e74c3c;
+}
+
+.message {
+    color: #2ecc71;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    legend {
+        font-size: 1.3em;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="date"],
+    select,
+    textarea {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+}
+
+
+#leaveMessage {
+    text-align: center;
+}
