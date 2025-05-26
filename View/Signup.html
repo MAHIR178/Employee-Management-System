@@ -7,7 +7,7 @@
             text-align: center;
             background: lightgrey;
         }
-    
+
         form {
             margin: 40px auto;
             padding: 15px;
@@ -15,25 +15,25 @@
             background: white;
             border: 1px solid gray;
         }
-    
+
         input, select {
             width: 95%;
             padding: 5px;
             margin: 8px 0;
         }
-    
+
         label {
             display: block;
             text-align: left;
             margin: 10px 0 5px;
         }
-    
+
         .error {
             color: red;
             font-size: 12px;
             text-align: left;
         }
-    
+
         button {
             background: darkblue;
             color: white;
@@ -43,17 +43,16 @@
             margin-top: 8px;
             cursor: pointer;
         }
-    
+
         button:hover {
             background: darkblue;
         }
-    
+
         legend {
             font-size: 18px;
             margin-bottom: 10px;
         }
     </style>
-    
 </head>
 <body>
 
@@ -103,13 +102,15 @@
                     <td><span id="errorDept" style="color:red"></span></td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="2">
                         <button type="button" onclick="validateForm()">Sign Up</button>
                     </td>
                 </tr>
             </table>
         </fieldset>
     </form>
+
+    <p id="serverResponse" style="color:green"></p>
 
     <script>
         function validateName(id, errorId) {
@@ -193,9 +194,32 @@
             let isDept = validateDept();
 
             if (isFname && isLname && isId && isEmail && isGender && isDept) {
-                alert("Form submitted successfully!");
+                submitForm();
             } else {
-                alert("Please correct the errors and try again.");
+                document.getElementById("serverResponse").innerHTML = "Please fix the errors above.";
+            }
+        }
+
+        function submitForm() {
+            let genderValue = document.querySelector('input[name="Gender"]:checked').value;
+            let user = {
+                fname: document.getElementById("fname").value,
+                lname: document.getElementById("lname").value,
+                id: document.getElementById("id").value,
+                email: document.getElementById("email").value,
+                gender: genderValue,
+                dept: document.getElementById("dept").value
+            };
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "../controller/signupCheck.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("json=" + JSON.stringify(user));
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("serverResponse").innerHTML = this.responseText;
+                }
             }
         }
     </script>

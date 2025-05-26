@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Department Editor</title>
+    <style>
+        body {
+            text-align: center;
+            background: lightgray;
+            font-family: Arial;
+        }
+
+        form {
+            margin: 20px auto;
+            padding: 15px;
+            width: 350px;
+            background: white;
+            border: 1px solid gray;
+        }
+
+        input {
+            width: 95%;
+            padding: 5px;
+            margin: 8px 0;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        button {
+            background: blue;
+            color: white;
+            border: none;
+            padding: 8px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        legend {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <fieldset>
+            <legend>Department Editor</legend>
+            <table>
+                <tr>
+                    <td>Department Name:</td>
+                    <td><input type="text" id="deptName" name="deptName" onblur="validateDeptName()"></td>
+                    <td><span id="errorDeptName" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td>Manager Name:</td>
+                    <td><input type="text" id="manager" name="manager" onblur="validateManager()"></td>
+                    <td><span id="errorManager" class="error"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit">Save Department</button></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+
+    <script>
+        function validateDeptName() {
+            const name = document.getElementById('deptName').value.trim();
+            const error = document.getElementById('errorDeptName');
+            if (name === "") {
+                error.innerHTML = "Department name is required.";
+                return false;
+            } else {
+                error.innerHTML = "";
+                return true;
+            }
+        }
+
+        function validateManager() {
+            const manager = document.getElementById('manager').value.trim();
+            const error = document.getElementById('errorManager');
+            if (manager === "") {
+                error.innerHTML = "Manager name is required.";
+                return false;
+            } else {
+                error.innerHTML = "";
+                return true;
+            }
+        }
+
+        function validateForm() {
+            return validateDeptName() && validateManager();
+        }
+    </script>
+</body>
+</html>

@@ -52,10 +52,17 @@
             font-size: 18px;
             margin-bottom: 10px;
         }
+
+        #msg {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <form method="post" action="../Controller/loginCheck.php" onsubmit="return validateForm()">
+
+    <form onsubmit="return ajaxLogin(event);">
         <fieldset>
             <legend>Login</legend>
             <table>
@@ -76,6 +83,7 @@
                     <td colspan="2"><a href="signup.html">Signup</a></td>
                 </tr>
             </table>
+            <div id="msg"></div>
         </fieldset>
     </form>
 
@@ -104,10 +112,41 @@
             }
         }
 
-        function validateForm() {
+        function ajaxLogin(event) {
+            if (event) event.preventDefault();
+
             let validUsername = validateUsername();
             let validPassword = validatePassword();
-            return validUsername && validPassword;
+
+            if (!validUsername || !validPassword) {
+                return false;
+            }
+
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+
+            let json = {
+                'username': username,
+                'password': password
+            };
+            let data = JSON.stringify(json);
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '../Controller/loginCheck.php', true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send('json=' + data);
+
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText.trim() === "success") {
+                        window.location.href = "../view/Dashboard.html";
+                    } else {
+                        document.getElementById('msg').innerHTML = this.responseText;
+                    }
+                }
+            }
+
+            return false;
         }
     </script>
 </body>
