@@ -6,77 +6,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Home</title>
-  <style>
-    body {
-      font-family: Arial;
-      background-color: lightgray;
-      padding: 30px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .widget {
-      background: white;
-      padding: 15px;
-      margin: 10px auto;
-      width: 300px;
-      border-radius: 5px;
-      box-shadow: 1px 1px 5px gray;
-      cursor: pointer;
-    }
-    .widget:hover {
-      background-color: grey;
-    }
-    #error {
-      color: red;
-      font-size: 12px;
-      text-align: center;
-    }
-    button {
-      background-color: blue;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-      display: block;
-      margin: 20px auto 0;
-    }
-    button:hover {
-      background-color: darkblue;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+   <link rel="stylesheet" href="../Asset/dashboardstyle.css">
+    
 </head>
 <body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <a href="Document storage.html" class="nav-button">Document Upload</a>
+       
+       <a href="Notifications.html" class="nav-button">Notifications</a>
+        <a href="org chart.html" class="nav-button">Organization Chart</a>
+        <a href="search.html" class="nav-button">Search</a>
+        <a href="leave.html" class="nav-button">Leave Request</a>
+        <a href="Exit.html" class="nav-button logout-btn">Exit</a>
+        <a href="../Controller/logout.php" class="nav-button logout-btn">Logout</a>
+        <a href="contact us .html" class="nav-button">Contanct Us</a>
+    </div>
 
-  <h1 id="head">Dashboard</h1>
+    <div class="main-content">
+        <h1 id="head">Welcome, <?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?>!</h1>
 
-  <div class="widget" onclick="showDetails('View Profile')">View Profile</div>
-  <div class="widget" onclick="showDetails('Task Completed')">Task Completed: <strong>14</strong></div>
-  <div class="widget" onclick="showDetails('Notifications')">Notifications: <strong>3</strong></div>
+        <div class="widget-container">
+            <div class="widget" onclick="window.location.href='profilemanage.html'">
+                <strong>Manage ur Profile</strong>
+                <p>Access your personal information</p>
+            </div>
+            </div>
+            <div class="widget" onclick="showDetails('Task Completed')">
+                <strong>Task Completed: 14</strong>
+                <p>View completed tasks</p>
+            </div>
+            <div class="widget" onclick="showDetails('Notifications')">
+                <strong>Notifications: 3</strong>
+                <p>Check your updates</p>
+            </div>
+        </div>
 
-  <button onclick="updateProfile()">Update Profile</button>
-  <p id="error"></p>
-  <br>
-  <a href="../Controller/logout.php">Logout</a>
+        <p id="error"></p>
+    </div>
 
-  <script>
-    function showDetails(info) {
-      document.getElementById('head').innerHTML = info;
-      document.getElementById('error').innerHTML = "";
-    }
+    <script>
+        function showDetails(info) {
+            const header = document.getElementById('head');
+            header.innerHTML = info;
+            header.style.color = '#3498db';
+            document.getElementById('error').innerHTML = "";
+            
+            
+        }
 
-    function updateProfile() {
-      let confirmUpdate = confirm("Do you want to update your profile?");
-      if (confirmUpdate) {
-        document.getElementById('head').innerHTML = "Update Profile (Shortcut)";
-        document.getElementById('error').innerHTML = "";
-      } else {
-        document.getElementById('error').innerHTML = "Update cancelled!";
-      }
-    }
-  </script>
-
+        function updateProfile() {
+            let confirmUpdate = confirm("Do you want to update your profile?");
+            if (confirmUpdate) {
+                document.getElementById('head').innerHTML = "Update Profile (Shortcut)";
+                document.getElementById('error').innerHTML = "";
+            } else {
+                document.getElementById('error').innerHTML = "Update cancelled!";
+            }
+        }
+    </script>
 </body>
 </html>
 

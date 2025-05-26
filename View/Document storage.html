@@ -2,104 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document Storage</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../Asset/Style.css">
 </head>
 <body>
+  <div class="container">
+    <form action="../Asset/Fileup.php" method="post" enctype="multipart/form-data" onsubmit="return validateDocForm()">
+      <fieldset>
+        <legend><b>Upload Document</b></legend>
+        <table>
+          <tr>
+            <td><label for="docTitle">Document Title:</label></td>
+            <td><input type="text" id="docTitle" name="docTitle"></td>
+          </tr>
+          <tr>
+            <td><label for="docFile">Select File:</label></td>
+            <td><input type="file" id="docFile" name="myfile" accept=".pdf,.doc,.docx,.jpg,.png"></td>
+          </tr>
+          <tr>
+            <td><label for="permission">Access Permission:</label></td>
+            <td>
+              <select id="permission" name="permission">
+                <option value="">-- Select Access Level --</option>
+                <option value="hr">HR Only</option>
+                <option value="manager">Managers</option>
+                <option value="employee">Employee & HR</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="signatureName">Electronic Signature:</label></td>
+            <td><input type="text" id="signatureName" name="signatureName" placeholder="Type your full name"></td>
+          </tr>
+          <tr>
+            <td><label for="retentionDate">Retention Until:</label></td>
+            <td><input type="date" id="retentionDate" name="retentionDate"></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <br>
+              <input type="submit" value="Upload Document">
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+      <p id="errorDoc" class="error"></p>
+    </form>
+    <a href="Dashboard.html"><button>Back to Dashboard</button></a>
+  </div>
 
-<fieldset>
-  <legend><b>Upload Document</b></legend>
-  <table>
+  <script>
+    function validateDocForm() {
+      const docTitle = document.getElementById('docTitle').value.trim();
+      const docFile = document.getElementById('docFile').files[0];
+      const permission = document.getElementById('permission').value;
+      const signatureName = document.getElementById('signatureName').value.trim();
+      const retentionDate = document.getElementById('retentionDate').value;
+      const errorDoc = document.getElementById('errorDoc');
 
-   
-    <tr>
-      <td>Document Title:</td>
-      <td><input type="text" id="docTitle"></td>
-    </tr>
+      errorDoc.textContent = '';
 
- 
-    <tr>
-      <td>Select File:</td>
-      <td><input type="file" id="docFile" accept=".pdf,.doc,.docx,.jpg,.png"></td>
-    </tr>
+      if (!docTitle) {
+        errorDoc.textContent = 'Please enter a document title.';
+        return false;
+      }
+      if (!docFile) {
+        errorDoc.textContent = 'Please select a file to upload.';
+        return false;
+      }
+      if (!permission) {
+        errorDoc.textContent = 'Please select an access permission level.';
+        return false;
+      }
+      if (!signatureName) {
+        errorDoc.textContent = 'Please provide an electronic signature.';
+        return false;
+      }
+      if (!retentionDate) {
+        errorDoc.textContent = 'Please select a retention date.';
+        return false;
+      }
 
+     
+      const allowedExtensions = ['pdf', 'doc', 'docx', 'jpg', 'png'];
+      const fileExtension = docFile.name.split('.').pop().toLowerCase();
+      if (!allowedExtensions.includes(fileExtension)) {
+        errorDoc.textContent = 'Invalid file type. Only PDF, DOC, DOCX, JPG, and PNG are allowed.';
+        return false;
+      }
 
-    <tr>
-      <td>Access Permission:</td>
-      <td>
-        <select id="permission">
-          <option value="">-- Select Access Level --</option>
-          <option value="hr">HR Only</option>
-          <option value="manager">Managers</option>
-          <option value="employee">Employee & HR</option>
-        </select>
-      </td>
-    </tr>
-
-
-    <tr>
-      <td>Electronic Signature:</td>
-      <td><input type="text" id="signatureName" placeholder="Type your full name"></td>
-    </tr>
-
-
-    <tr>
-      <td>Retention Until:</td>
-      <td><input type="date" id="retentionDate"></td>
-    </tr>
-
-  
-    <tr>
-      <td colspan="2" align="center">
-        <br>
-        <input type="button" value="Upload Document" onclick="validateDocForm()">
-      </td>
-    </tr>
-
-  </table>
-</fieldset>
-
-<p id="errorDoc" style="color:red;"></p>
-
-<script>
-function validateDocForm() {
-  let title = document.getElementById("docTitle").value.trim();
-  let file = document.getElementById("docFile").files[0];
-  let permission = document.getElementById("permission").value;
-  let signatureName = document.getElementById("signatureName").value.trim();
-  let retentionDate = document.getElementById("retentionDate").value;
-  let error = document.getElementById("errorDoc");
-
-  error.innerHTML = "";
-
-  if (!title) {
-    error.innerHTML = "Please enter the document title.";
-    return;
-  }
-
-  if (!file) {
-    error.innerHTML = "Please select a document file to upload.";
-    return;
-  }
-
-  if (!permission) {
-    error.innerHTML = "Please select an access permission.";
-    return;
-  }
-
-  if (!signatureName) {
-    error.innerHTML = "Please provide your electronic signature.";
-    return;
-  }
-
-  if (!retentionDate) {
-    error.innerHTML = "Please specify a retention end date.";
-    return;
-  }
-
-  alert("Document uploaded successfully!");
-}
-</script>
-
+      return true;
+    }
+  </script>
 </body>
 </html>
