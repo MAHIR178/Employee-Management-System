@@ -1,16 +1,13 @@
 <?php
     session_start();
 
-    // Read JSON from AJAX
     if (isset($_POST['json'])) {
         $data = json_decode($_POST['json'], true);
         $username = trim($data['username']);
         $password = trim($data['password']);
 
-        // DB connection
         $con = mysqli_connect('127.0.0.1', 'root', '', 'wabtech');
 
-        // Validate inputs
         if ($username == "" || $password == "") {
             echo "Null username/password!";
         } else {
